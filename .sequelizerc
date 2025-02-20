@@ -1,0 +1,6 @@
+const { resolve } = require('path');
+
+module.exports = {
+  config: resolve('dist/configs/db.js'),
+  'migrations-path': resolve('dist/migrations'),
+};
