@@ -16,7 +16,7 @@ export class UsersService {
     return this.userModel.findAll();
   }
 
-  findOne(id: number): Promise<User | null> {
+  async findById(id: number): Promise<User | null> {
     return this.userModel.findOne({
       where: {
         id,
@@ -24,8 +24,16 @@ export class UsersService {
     });
   }
 
+  async findByName(username: string): Promise<User | null> {
+    return this.userModel.findOne({
+      where: {
+        username,
+      },
+    });
+  }
+
   async update(id: number, updateUserDto: UpdateUserDto) {
-    const user = await this.findOne(id);
+    const user = await this.findById(id);
 
     if (user) {
       await user.update(updateUserDto);
@@ -33,7 +41,7 @@ export class UsersService {
   }
 
   async remove(id: number): Promise<void> {
-    const user = await this.findOne(id);
+    const user = await this.findById(id);
 
     if (user) {
       await user.destroy();

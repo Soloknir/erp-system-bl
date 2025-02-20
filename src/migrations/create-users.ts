@@ -12,24 +12,16 @@ module.exports = {
       tabel: {
         type: DataTypes.STRING,
       },
-      firstName: {
+      username: {
         type: DataTypes.STRING,
       },
-      lastName: {
+      password: {
         type: DataTypes.STRING,
-      },
-      createdAt: {
-        allowNull: false,
-        type: DataTypes.DATE,
-      },
-      updatedAt: {
-        allowNull: false,
-        type: DataTypes.DATE,
       },
     });
   },
 
   async down(queryInterface: QueryInterface): Promise<void> {
-    await queryInterface.dropTable('users');
+    await queryInterface.dropTable('Users');
   },
 };
