@@ -13,7 +13,19 @@ export class UsersService {
   }
 
   async findAll(): Promise<User[]> {
-    return this.userModel.findAll();
+    return this.userModel.findAll({ attributes: ['username', 'tabel'] });
+  }
+
+  async findAllNames(): Promise<string[]> {
+    const users = await this.findAll();
+
+    return users.map(({ username }) => username);
+  }
+
+  async findAllTabels(): Promise<string[]> {
+    const users = await this.findAll();
+
+    return users.map(({ tabel }) => tabel);
   }
 
   async findById(id: number): Promise<User | null> {
@@ -24,10 +36,14 @@ export class UsersService {
     });
   }
 
-  async findByName(username: string): Promise<User | null> {
+  async findByNameAndTabel(
+    username: string,
+    tabel: string,
+  ): Promise<User | null> {
     return this.userModel.findOne({
       where: {
         username,
+        tabel,
       },
     });
   }

@@ -20,14 +20,14 @@ export class UsersController {
     return this.usersService.create(createUserDto);
   }
 
-  @Get()
-  findAll() {
-    return this.usersService.findAll();
+  @Get('names')
+  findAllNames() {
+    return this.usersService.findAllNames();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.usersService.findById(+id);
+  @Get('tabels')
+  findAllTabels() {
+    return this.usersService.findAllTabels();
   }
 
   @Patch(':id')

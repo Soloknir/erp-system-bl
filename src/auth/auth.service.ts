@@ -9,19 +9,24 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async signIn(username: string, pass: string): Promise<any> {
-    const user = await this.usersService.findByName(username);
+  async signIn(
+    username: string,
+    password: string,
+    tabel: string,
+  ): Promise<any> {
+    const user = await this.usersService.findByNameAndTabel(username, tabel);
 
-    if (user?.password !== pass) {
+    if (user?.password !== password) {
       throw new UnauthorizedException();
     }
 
-    const payload = { tabel: user.tabel, username: user.username };
+    const payload = { id: user.id, tabel: user.tabel, username: user.username };
 
     return {
-      access_token: await this.jwtService.signAsync(payload, {
+      accessToken: await this.jwtService.signAsync(payload, {
         secret: process.env.JWT_SECRET,
       }),
+      user: payload,
     };
   }
 }
