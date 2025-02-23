@@ -6,7 +6,7 @@
 
 ```console
 $ npm i
-& npm run build
+$ npm run build
 $ npm run migration:run
 $ npm run seeders:run
 $ npm run start
